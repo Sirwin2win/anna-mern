@@ -24,14 +24,14 @@ const Header = () => {
             Dropdown
           </Link>
           <ul class="dropdown-menu">
-            <li><Link class="dropdown-item" to="#">Action</Link></li>
+            <li><Link class="dropdown-item" to="/create-product">Create Product</Link></li>
             <li><Link class="dropdown-item" to="#">Another action</Link></li>
             <li><hr class="dropdown-divider" /></li>
             <li><Link class="dropdown-item" to="#">Something else here</Link></li>
           </ul>
         </li>
         <li class="nav-item">
-          <Link class="nav-link disabled" aria-disabled="true">Disabled</Link>
+          <Link to={'/product'} class="nav-link ">Product</Link>
         </li>
       </ul>
       <form class="d-flex" role="search">
