@@ -9,6 +9,8 @@ import store from './features/store/store'
 import ProductFrom from './forms/ProductFrom'
 import Product from './pages/Product'
 import DetailPage from './components/DetailPage'
+import CartPage from './components/CartPage'
+import RegisterForm from './forms/RegisterForm'
 
 
 const App = () => {
@@ -21,6 +23,8 @@ const App = () => {
   <Route path='/create-product' element={<ProductFrom />} />
   <Route path='/product' element={<Product />} />
   <Route path='/product/:id' element={<DetailPage />} />
+  <Route path='/cart' element={<CartPage />} />
+  <Route path='/register' element={<RegisterForm />} />
   </Route>
 </Routes>
 </BrowserRouter>

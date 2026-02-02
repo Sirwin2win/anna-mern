@@ -1,8 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 
+
 const Header = () => {
+  const {totalQuantity} = useSelector(state=>state.carts)
   return (
     <div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -25,7 +28,7 @@ const Header = () => {
           </Link>
           <ul class="dropdown-menu">
             <li><Link class="dropdown-item" to="/create-product">Create Product</Link></li>
-            <li><Link class="dropdown-item" to="#">Another action</Link></li>
+            <li><Link class="dropdown-item" to="/register">Register</Link></li>
             <li><hr class="dropdown-divider" /></li>
             <li><Link class="dropdown-item" to="#">Something else here</Link></li>
           </ul>
@@ -34,6 +37,7 @@ const Header = () => {
           <Link to={'/product'} class="nav-link ">Product</Link>
         </li>
       </ul>
+      <button className='btn btn-warning'><Link to={'/cart'}>cart</Link>{totalQuantity}</button>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button class="btn btn-outline-success" type="submit">Search</button>

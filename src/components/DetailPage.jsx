@@ -2,6 +2,8 @@ import React, { useEffect,useState  } from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchSingle } from '../features/products/SingleProduct'
 import { useDispatch, useSelector } from 'react-redux'
+import { addToCart } from '../features/cart/cartSlice'
+
 
 
 
@@ -13,8 +15,8 @@ const DetailPage = () => {
         if(status==='idle'){
             dispatch(fetchSingle(id))
         }
-    },[status,dispatch,id])
-    console.log(product)
+    },[])
+    // console.log(product)
   return (
     <div>
         <h1>Details Page</h1>
@@ -25,6 +27,8 @@ const DetailPage = () => {
             <div className="col-sm-5">
                 <h5>{product.title}</h5>
                 <p>{product.description}</p>
+                <p>{product.price}</p>
+                <button className='btn btn-danger' onClick={()=>dispatch(addToCart(product))}>Add To Cart</button>
             </div>
         </div>
     </div>
