@@ -28,6 +28,32 @@ export const fetchProduct = createAsyncThunk(
         }
     }
 )
+// delete 
+
+export const deleteProduct = createAsyncThunk(
+    'products/delete',
+    async(id,thunkAPI)=>{
+        try {
+            await axios.delete(`${API}/${id}`)
+            return id
+        } catch (error) {
+                        return thunkAPI.rejectWithValue(error.message)
+
+        }
+    }
+)
+// update
+export const update = createAsyncThunk(
+    'products/update',
+    async({id,formData},thunkAPI)=>{
+        try {
+            const res = await axios.put(`${API}/${id}`,formData)
+            return res.data
+        } catch (error) {
+             return thunkAPI.rejectWithValue(error.message)
+        }
+    }
+)
 
 const productSlice = createSlice({
     name:'products',
@@ -63,6 +89,37 @@ const productSlice = createSlice({
         })
         .addCase(fetchProduct.rejected, (state,action)=>{
             state.status = 'failed'
+            state.error = action.payload
+        })
+        // delete
+        .addCase(deleteProduct.pending,(state)=>{
+            state.status='loading'
+            state.error=null
+        })
+        .addCase(deleteProduct.fulfilled,(state,action)=>{
+            state.status = 'succeeded'
+            const id = action.payload
+            state.products = state.products.filter(v=>v._id!=id)
+        })
+        .addCase(deleteProduct.rejected,(state,action)=>{
+            state.status = 'failed'
+            state.error = action.payload
+        })
+        // update
+        .addCase(update.pending,(state)=>{
+            state.status='loading'
+            state.error = null
+        })
+        .addCase(update.fulfilled,(state,action)=>{
+            state.status = 'succeeded'
+            const updated = action.payload
+            const index = state.products.findIndex(p=>p._id==updated._id)
+            if(index !== -1){
+                state.products[index] = updated
+            }
+        })
+        .addCase(update.rejected, (state,action)=>{
+            state.status= 'failed'
             state.error = action.payload
         })
     }

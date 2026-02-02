@@ -1,18 +1,18 @@
 import React,{useState,useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
+import { login } from '../features/auth/authSlice'
 
 
-const RegisterForm = () => {
+const LoginForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [data,setData] = useState({
-        name:'',
         email:'',
         password:''
     })
-    const {status} = useSelector(state=>state.users)
+    const {status,user} = useSelector(state=>state.users)
+    console.log(user)
 
     const handleChange = (e)=>{
         const name = e.target.name
@@ -21,19 +21,16 @@ const RegisterForm = () => {
     }
     const handleSubmit = (e)=>{
         e.preventDefault()
-        dispatch(register(data))
+        dispatch(login(data))
         if(status==='succeeded'){
-          navigate('/login')
+          navigate('/product')
         }
     }
 
+
   return (
-    <div className='container'>
+   <div className='container'>
         <form method='post'>
-             <div className='mb-5'>
-                <label htmlFor="name">Name</label>
-                <input type="text" id='name' className='form-control' name='name' value={data.name} onChange={handleChange} placeholder='Your name' />
-             </div>
               <div className='mb-5'>
                 <label htmlFor="email">Email</label>
                 <input type="text" id='email' className='form-control' name='email' value={data.email} onChange={handleChange} placeholder='your email' />
@@ -42,10 +39,10 @@ const RegisterForm = () => {
                 <label htmlFor="password">Password</label>
                 <input type="password" id='password' className='form-control' name='password' value={data.password} onChange={handleChange} placeholder='your password' />
              </div>
-             <input type="submit" value={'Register'} onClick={handleSubmit}  />
+             <input type="submit" value={'Login'} onClick={handleSubmit}  />
         </form>
     </div>
   )
 }
 
-export default RegisterForm
+export default LoginForm

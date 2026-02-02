@@ -3,14 +3,14 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 
-const API = 'https://anna-apis-144y.onrender.com/api/users'
+const API = 'https://anna-apis-144y.onrender.com/api/auth'
 
 // register
 export const register = createAsyncThunk(
     'users/register',
-    async(forms,thunkAPI)=>{
+    async({name,email,password},thunkAPI)=>{
         try {
-            const response = await axios.post(`${API}/register`,forms)
+            const response = await axios.post(`${API}/register`,{name,email,password})
         return response.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message)
@@ -69,7 +69,8 @@ const authSlice = createSlice({
         const {token} = action.payload
         try {
            const decoded = jwtDecode(token);
-           state.user = decoded._id
+           state.user = decoded.id
+        
         } catch (error) {
             state.error = error.message
         }

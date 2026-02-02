@@ -11,6 +11,9 @@ import Product from './pages/Product'
 import DetailPage from './components/DetailPage'
 import CartPage from './components/CartPage'
 import RegisterForm from './forms/RegisterForm'
+import EditProductForm from './forms/EditProductForm'
+import LoginForm from './forms/LoginForm'
+import ProductTable from './components/ProductTable'
 
 
 const App = () => {
@@ -25,6 +28,9 @@ const App = () => {
   <Route path='/product/:id' element={<DetailPage />} />
   <Route path='/cart' element={<CartPage />} />
   <Route path='/register' element={<RegisterForm />} />
+  <Route path='/login' element={<LoginForm />} />
+  <Route path='/product-table' element={<ProductTable />} />
+  <Route path='/edit-product' element={<EditProductForm />} />
   </Route>
 </Routes>
 </BrowserRouter>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { logout } from '../features/auth/authSlice'
 
 
 
@@ -28,9 +29,12 @@ const Header = () => {
           </Link>
           <ul class="dropdown-menu">
             <li><Link class="dropdown-item" to="/create-product">Create Product</Link></li>
+            <li><Link class="dropdown-item" to="/product-table">Product Table</Link></li>
             <li><Link class="dropdown-item" to="/register">Register</Link></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><Link class="dropdown-item" to="#">Something else here</Link></li>
+            <li><Link class="dropdown-item" to="/login">Login</Link></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><button className='btn btn-danger' onClick={logout}>LogOut</button></li>
           </ul>
         </li>
         <li class="nav-item">
